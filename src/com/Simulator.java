@@ -65,5 +65,6 @@ public class Simulator {
         for (int i = 0; i < Integer.parseInt(lines[0]); i++) {
             weatherTower.changeWeather();
         }
+        System.out.println("Simulation has been completed!");
     }
 }
