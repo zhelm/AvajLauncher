@@ -3,9 +3,7 @@ package com;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -18,7 +16,27 @@ import com.Tower.WeatherTower;
 public class Simulator {
 
     public static void main(String[] args) throws IOException {
-        // TODO Confirm that the file does exist
+
+        if(args.length == 0) {
+            System.out.println("Please provide an input text file.");
+            return ;
+        }
+        Pattern validType = Pattern.compile("^(.*)(.txt)$");
+        Matcher match = validType.matcher(args[0]);
+        if(!match.find()) {
+            System.out.println("This is not a text file");
+            return ;
+        }
+        File check = new File(args[0]);
+        if(!check.exists()) {
+            System.out.println("File does not exist. Please check the path and try again.");
+            return ;
+        }
+        if(!check.isFile()) {
+            System.out.println("Please provide a valid file and not a directory.");
+            return ;
+        }
+
         List<String> read = Collections.emptyList();
         read = Files.readAllLines(Paths.get(args[0]));
 
@@ -26,7 +44,6 @@ public class Simulator {
         lines = read.toArray(lines);
 
         for (int i = 0; i < lines.length; i++) {
-            // ^(Baloon|JetPlane|Helicopter) [A-Z]+[0-9]+ [0-9]+ [0-9]+ [0-9]+\n?$
             Pattern pattern = Pattern.compile("^(Baloon|JetPlane|Helicopter) [A-Z]+[0-9]+ [0-9]+ [0-9]+ [0-9]+\\n?$");
             if(i == 0) {
                 pattern = Pattern.compile("^[0-9]+\\n?$");
