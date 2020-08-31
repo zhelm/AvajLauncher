@@ -10,7 +10,7 @@ Run the following:
 git clone https://github.com/zhelm/AvajLauncher.git
 cd AvajLauncher/src
 ````
-Then run the bash scripts:
+Then run the following bash scripts to compile and execute:
 ````
 ./compile.sh
 ./execute.sh ../Info/scenario.txt
